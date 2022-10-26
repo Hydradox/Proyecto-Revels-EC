@@ -79,16 +79,22 @@
                     <fieldset>
                         <legend>Correo electrónico</legend>
                         <input type="email" name="registerEmail" placeholder="ejemplo@ejemplo.com" required>
+
+                        <img title="" class="error" src="/media/icons/exclamation-mark.svg" alt="Exclamation mark">
                     </fieldset>
 
                     <fieldset>
                         <legend>Contraseña</legend>
                         <input type="password" name="registerPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+
+                        <img title="" class="error" src="/media/icons/exclamation-mark.svg" alt="Exclamation mark">
                     </fieldset>
 
                     <fieldset>
                         <legend>Repetir contraseña</legend>
                         <input type="password" name="registerCheckPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
+
+                        <img title="" class="error" src="/media/icons/exclamation-mark.svg" alt="Exclamation mark">
                     </fieldset>
 
                     <div class="input-group">

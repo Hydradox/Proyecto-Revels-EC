@@ -28,7 +28,7 @@ body {
 /* Header start */
 header {
     width: 100%;
-    height: 3rem;
+    height: 5rem;
     padding: .3rem 1rem;
 
     background-color: var(--color-primary-dark);
@@ -42,6 +42,8 @@ header {
 
 header a {
     color: var(--white);
+    height: min-content;
+    padding: .5rem 1rem;
 }
 
 header a:hover {
@@ -56,6 +58,45 @@ header a:hover {
 
 header img {
     height: 100%;
+}
+
+.header-container {
+    width: max-content;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form > * {
+    margin-inline: .5rem;
+}
+
+.search-form fieldset {
+    height: 3rem;
+    margin-bottom: .5rem;
+}
+
+.search-form legend {
+    font-size: .9em;
+}
+
+.search-form input[type="text"] {
+    letter-spacing: .5px;
+    text-indent: 5px;
+    font-size: 1em;
+}
+
+.search-form input[type="submit"].btn-white {
+    font-size: 1em;
+    padding: .3rem .7rem;
 }
 /* Header end */
 
@@ -130,6 +171,8 @@ a:hover {
 
     background-color: var(--color-primary);
     color: var(--white);
+
+    cursor: pointer;
 }
 
 .btn-white {
@@ -197,6 +240,10 @@ input[type="password"] {
     letter-spacing: 10px;
 }
 
+
+fieldset:not(.error) img.error { display: none; }
+
+fieldset.error img.error { display: block; }
 
 fieldset.error { border-color: red; }
 fieldset.error legend { color: red; }
