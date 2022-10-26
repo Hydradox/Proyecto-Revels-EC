@@ -32,6 +32,7 @@ header {
     padding: .3rem 1rem;
 
     background-color: var(--color-primary-dark);
+    color: var(--white);
 
     display: flex;
     align-items: center;
@@ -292,4 +293,10 @@ fieldset .error:hover {
 
 .correct::before {
     content: "✓ ";
+}
+
+
+
+.invisible {
+    display: none;
 }

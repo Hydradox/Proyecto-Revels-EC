@@ -1,8 +1,13 @@
 <?php
-    require_once('inc/Red-Objects.php');
+    require_once('./inc/Red-Objects.php');
 
 
-    // Verificar login
+    // Comprobar si está logueado
+    if(isset($_COOKIE['PHPSESSID'])) {
+        // Si está logueado, mostrar el header
+        header('Location: /pages/home.php');
+    }
+
     if (!isset($_POST)) {
         if($red->login('antonio@mail.com', 'Antonio'))
             header('Location: login.php');
@@ -69,7 +74,7 @@
                 <div class="title">Regístrate</div>
 
                 <form action="#" method="post">
-                    <fieldset class="error">
+                    <fieldset>
                         <legend>Nombre de usuario</legend>
                         <input type="text" name="registerUsername" placeholder="PepeJuan17" required>
 
@@ -101,7 +106,7 @@
                         <input class="btn" type="submit" value="Registrarse">
                     </div>
 
-                    <p class="correct">Registro realizado correctamente</p>
+                    <p class="correct invisible">Registro realizado correctamente</p>
                 </form>
             </div>
         </div>
