@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --color-primary: #07b4ff;
+    --color-primary-dark: #0a8ec9;
+    --color-primary-light: #f5f8fa;
+    --white: #ffffff;
+    --grey: #c9c9c9;
+    --semi-black: #333;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: .5px;
+    color: var(--semi-black);
+}
+
+
+
+
+/* Header start */
+header {
+    width: 100%;
+    height: 3rem;
+    padding: .3rem 1rem;
+
+    background-color: var(--color-primary-dark);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 2px solid var(--white);
+}
+
+header a {
+    color: var(--white);
+}
+
+header a:hover {
+    color: var(--grey);
+}
+
+.img-link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header img {
+    height: 100%;
+}
+/* Header end */
+
+
+
+/* Footer start */
+footer {
+    width: 100%;
+    min-height: 3rem;
+
+    background-color: var(--white);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    text-align: center;
+    line-height: 1.5em;
+
+    border-top: 2px solid var(--color-primary);
+}
+
+footer > * {
+    margin: 0 1rem;
+}
+/* Footer end */
+
+
+
+/* General styles */
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: color 0.1s ease-in-out;
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+
+
+
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+
+
+[class^="col-"] {
+    display: flex;
+    flex-direction: row;
+}
+
+.col-2 > .col-item { width: 50%; }
+
+
+
+/* Buttons */
+[class^="btn"] {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    border: 0;
+    
+    font-size: 1.1em;
+    font-weight: 600;
+
+    background-color: var(--color-primary);
+    color: var(--white);
+}
+
+.btn-white {
+    background-color: var(--white);
+    color: var(--color-primary);
+}
+
+
+
+
+/* Forms */
+fieldset {
+    position: relative;
+
+    border: 2px solid var(--color-primary);
+    border-radius: 5px;
+
+    height: 4em;
+    padding-bottom: .4rem;
+    padding-inline: .3rem;
+
+    margin-bottom: 1rem;
+    transition: border .1s ease-in-out;
+}
+
+fieldset.white {
+    border-color: var(--white);
+}
+
+fieldset legend {
+    margin-left: .6rem;
+    padding: 0 .4rem;
+
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+fieldset.white legend {
+    color: var(--white);
+}
+
+
+fieldset input {
+
+    text-indent: 10px;
+    letter-spacing: 1px;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--semi-black);
+
+    padding-inline: .3rem;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 3px;
+    border: none;
+    outline: none;
+
+    background-color: var(--color-primary-light);
+}
+
+
+input[type="password"] {
+    letter-spacing: 10px;
+}
+
+
+fieldset.error { border-color: red; }
+fieldset.error legend { color: red; }
+
+fieldset.error.white { border-color: #ff2b2b; }
+fieldset.error.white legend { color: #ff2b2b; }
+
+
+fieldset:has(input:focus) {
+    border-width: 3px;
+}
+
+
+
+fieldset .error {
+    position: absolute;
+
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: #fff;
+
+    right: .8rem;
+    top: .4rem;
+
+    cursor: help;
+    transition: padding .1s ease-in-out;
+}
+
+fieldset .error:hover {
+    padding: .1rem;
+}
+
+
+
+
+
+
+
+.correct {
+    margin-top: 2rem;
+    text-indent: .5rem;
+
+    color: green;
+}
+
+.correct::before {
+    content: "✓ ";
+}

@@ -1,0 +1,59 @@
+@import url('../main.css');
+
+
+
+.index-page {
+    width: 100%;
+    min-height: calc(100vh - 6rem);
+}
+
+.index-page .col-item:first-child {
+    background-color: var(--color-primary);
+    color: var(--white);
+}
+
+
+.col-item {
+    display: grid;
+    place-items: center;
+}
+
+
+.index-item {
+    width: 60%;
+    padding: 3rem 0;
+}
+
+
+
+
+@media screen and (max-width: 850px) {
+    [class^="col-"] {
+        flex-direction: column;
+    }
+
+    .col-2 > .col-item {
+        width: 100%;
+        min-height: 80vh;
+    }
+
+
+    .index-item {
+        margin: 3rem 0;
+    }
+}
+
+
+
+@media screen and (max-width: 1150px) {
+    .index-item {
+        width: 80%;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+    .index-item {
+        width: 95%;
+    }
+}
