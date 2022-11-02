@@ -26,6 +26,11 @@ body {
 
 
 /* Header start */
+main {
+    width: 100%;
+    min-height: calc(100vh - 5rem);
+}
+
 header {
     width: 100%;
     height: 5rem;

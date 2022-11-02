@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="/css/pages/home.css">
 </head>
 <body>
-    <?php require_once('../inc/header.inc.php') ?>
+    <?php require_once('./inc/header.inc.php') ?>
 
-    <h1>Home</h1>
+    <main>
+
+    </main>
 </body>
 </html>
