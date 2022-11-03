@@ -1,1 +1,155 @@
 @import url('/css/main.css');
+
+
+main {
+    width: 100%;
+    height: calc(100vh - 5rem);
+
+    display: flex;
+}
+
+main > * {
+    flex-shrink: 0;
+}
+
+
+.userlist {
+    max-width: 15rem;
+    min-width: 10rem;
+    width: 20vw;
+    height: 100%;
+}
+
+.listed-user {
+    width: 100%;
+    height: 5rem;
+    padding: 1rem;
+}
+
+.listed-user a {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.listed-user img {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+
+    margin-right: 1rem;
+}
+
+.listed-user span {
+    width: 100%;
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+.revels-container {
+    flex-grow: 1;
+    overflow-y: auto;
+
+    background-color: var(--color-primary-light);
+    padding: .5rem 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.revels-header {
+    width: 100%;
+    margin-bottom: 1rem;
+
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+
+/**
+ * REVEL
+ */
+.revel {
+    width: 100%;
+    min-height: 100px;
+    height: auto;
+
+    display: block;
+
+    padding: 1rem;
+    margin-bottom: 5px;
+    background-color: var(--white);
+
+    display: flex;
+    transition: margin .2s ease-in-out;
+}
+
+.revel:hover {
+    /*margin: 1rem 5px;*/
+}
+
+.revel-pp {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.revel-data {
+    flex-grow: 1;
+    height: 100%;
+
+    margin-left: 1rem;
+    color: var(--semi-black);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.revel-data a { color: var(--semi-black); }
+
+
+.revel-sender {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.revel-text {
+    margin-top: .5rem;
+    font-weight: 400;
+}
+
+.revel-actions {
+    max-width: 600px;
+    width: 100%;
+    height: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.revel-actions > * {
+    margin-inline: 3rem;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.revel-actions img {
+    height: 60%;
+}
+
+.action-label {
+    margin-left: .5rem;
+}
