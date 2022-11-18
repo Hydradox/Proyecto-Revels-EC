@@ -56,10 +56,19 @@ header a:hover {
     color: var(--grey);
 }
 
+.header-logo {
+    height: 60%;
+}
+
 .img-link {
     height: 100%;
     display: flex;
     align-items: center;
+}
+
+.img-actions {
+    height: 70%;
+    padding-inline: .5rem;
 }
 
 header img {
@@ -306,9 +315,35 @@ fieldset .error:hover {
     display: none;
 }
 
+.txt-header {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
 
-.list-header {
-    font-size: 1.5em;
+    text-align: left;
+    font-size: 1.3em;
     font-weight: 600;
-    margin: .3rem .5rem;
+}
+
+
+.silent-wrapper {
+    margin-top: 2rem;
+    margin-inline: auto;
+    width: min(70%, 40rem);
+    aspect-ratio: 1 / 1;
+
+    background-color: #ccc;
+    border-radius: 50%;
+
+    position: relative;
+}
+
+.silent-wrapper img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+
+    position: absolute;
+    bottom: -3%;
+    left: -3%;
 }

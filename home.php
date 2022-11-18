@@ -1,12 +1,14 @@
 <?php
+require_once('inc/req.inc.php');
+require_once('inc/avatares.inc.php');
+
+
 // Comprobar si NO está logueado
-if (!isset($_COOKIE['PHPSESSID'])) {
+if ($user === null) {
     // Si está logueado, mostrar el header
     header('Location: /index.php');
 }
 
-require_once('inc/db.inc.php');
-require_once('inc/avatares.inc.php');
 
 // Estamos "conectados" como usuario con ID #6
 $follows = $con->query('SELECT id, usuario
@@ -14,19 +16,19 @@ $follows = $con->query('SELECT id, usuario
     WHERE id IN (
         SELECT userfollowed
         FROM follows
-        WHERE userid = 6
-    );');
+        WHERE userid = ' . $user['id'] . 
+    ');');
 
 
 // Obtener revels propios y de los usuarios que seguimos
 $revels = $con->query('SELECT id, userid, texto, fecha
     FROM revels
-    WHERE userid = 6
-    OR userid IN (
+    WHERE userid = ' . $user['id'] .
+    ' OR userid IN (
         SELECT userfollowed
         FROM follows
-        WHERE userid = 6
-    )
+        WHERE userid = ' . $user['id'] .
+    ')
     ORDER BY fecha DESC;');
 ?>
 
@@ -48,7 +50,7 @@ $revels = $con->query('SELECT id, userid, texto, fecha
 
     <main>
         <div class="userlist">
-            <span class="list-header">Siguiendo</span>
+            <span class="txt-header">Siguiendo</span>
 
             <ul>
                 <?php
@@ -60,12 +62,16 @@ $revels = $con->query('SELECT id, userid, texto, fecha
 
                         echo '</a></li>';
                     }
+
+                    if($follows->rowCount() === 0) {
+                        require_once './inc/empty.inc.php';
+                    }
                 ?>
             </ul>
         </div> <!-- .userlist -->
 
         <div class="revels-container">
-            <span class="revels-header">Revels de gente que sigues</span>
+            <span class="txt-header">Revels de gente que sigues</span>
 
             <?php while ($revel = $revels->fetch()) {
                 $sender = $con->query('SELECT usuario FROM users WHERE id = ' . $revel['userid'] . ';');
@@ -75,7 +81,7 @@ $revels = $con->query('SELECT id, userid, texto, fecha
                     <img class="revel-pp" src=<?= getAvatar($revel['userid']) ?> alt="Avatar del usuario">
                     
                     <div class="revel-data">
-                        <a href=<?= '/revel/' . $revel['id'] ?> >
+                        <a class="revel-content" href=<?= '/revel/' . $revel['id'] ?> >
                             <span class="revel-sender">@<?= $sender->fetch()['usuario'] ?></span>
                             <p class="revel-text"><?= $revel['texto'] ?></p>
                         </a>
