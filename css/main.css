@@ -5,7 +5,9 @@
     --color-primary-dark: #0a8ec9;
     --color-primary-light: #f5f8fa;
     --white: #ffffff;
+    --grey-light: #f7f7f7;
     --grey: #c9c9c9;
+    --dark-grey: #868686;
     --semi-black: #333;
 }
 
@@ -329,7 +331,7 @@ fieldset .error:hover {
 .silent-wrapper {
     margin-top: 2rem;
     margin-inline: auto;
-    width: min(70%, 40rem);
+    width: min(70%, 20rem);
     aspect-ratio: 1 / 1;
 
     background-color: #ccc;
@@ -346,4 +348,12 @@ fieldset .error:hover {
     position: absolute;
     bottom: -3%;
     left: -3%;
+}
+
+.silent-txt {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: .8em;
+    color: #333;
+    text-align: center;
+    margin-top: 1rem;
 }

@@ -5,15 +5,15 @@
 
     <?php if($user !== null) { /* Si está logueado */ ?>
         <div class="header-container">
-            <form class="search-form" action="#" method="GET">
+            <form class="search-form" action="result.php" method="GET" autocomplete="off">
                 <fieldset class="white">
                     <legend>Buscar usuario</legend>
-                    <input type="text" name="searchRevel" id="searchRevel" placeholder="PepeJuan17">
+                    <input type="text" name="user" id="user" placeholder="PepeJuan17">
                 </fieldset>
                 <input class="btn-white" type="submit" value="Buscar">
-
-                <span>|</span>
             </form>
+
+            <span>|</span>
 
             <a class="img-link img-actions" title="Home" href="/"><img src="/media/icons/home.svg" alt="Home"></a>
             <a class="img-link img-actions" title="Nuevo Revel" href="/new.php"><img src="/media/icons/add.svg" alt="Nuevo Revel"></a>

@@ -36,17 +36,14 @@ $revels = $con->query('SELECT id, userid, texto, fecha
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage | Revels</title>
+    <?php require_once('inc/meta.inc.php'); ?>
 
-    <link rel="shortcut icon" href="/media/icons/logo-icon.png" type="image/x-icon">
+    <title>Homepage | Revels</title>
     <link rel="stylesheet" href="/css/pages/home.css">
 </head>
 
 <body>
-    <?php require_once('./inc/header.inc.php') ?>
+    <?php include('./inc/header.inc.php') ?>
 
     <main>
         <div class="userlist">
@@ -64,7 +61,8 @@ $revels = $con->query('SELECT id, userid, texto, fecha
                     }
 
                     if($follows->rowCount() === 0) {
-                        require_once './inc/empty.inc.php';
+                        include('./inc/empty.inc.php');
+                        echo '<div class="silent-txt">Esto está muy vacío...<br>¿Por qué no sigues a alguien?</div>';
                     }
                 ?>
             </ul>
@@ -98,7 +96,12 @@ $revels = $con->query('SELECT id, userid, texto, fecha
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php }
+                if($revels->rowCount() === 0) {
+                    include('./inc/empty.inc.php');
+                    echo '<div class="silent-txt">Está feed está muy vacía</div>';
+                }
+            ?>
         </div>
     </main>
 </body>

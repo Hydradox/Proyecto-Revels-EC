@@ -1,0 +1,95 @@
+@import url('../main.css');
+
+main {
+    width: min(100%, 1200px);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.user-results {
+    margin-top: 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1rem;
+}
+
+.user {
+    max-width: 300px;
+    min-height: 200px;
+
+    border: 2px solid var(--color-primary);
+    border-radius: .5rem;
+}
+
+.user__upper {
+    background-color: var(--color-primary);
+}
+
+.user__upper img {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+    border-radius: 50%;
+
+    position: relative;
+    bottom: -2.2rem;
+    left: 1.2rem;
+
+    background-color: #fff;
+    padding: .25rem;
+}
+
+
+.user__lower {
+    margin-top: 1.2rem;
+    padding: 1rem;
+
+    font-weight: 600;
+    color: var(--semi-black);
+}
+
+
+.follow-btn {
+    display: block;
+    margin-top: 1rem;
+    padding: .5rem .3rem;
+
+    background-color: var(--grey-light);
+    color: var(--dark-grey);
+    text-align: center;
+    border-radius: .3rem;
+
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.follow-btn:hover {
+    background-color: var(--grey);
+    color: var(--semi-black);
+}
+
+.follow-btn::before {
+    content: '+ Seguir';
+    height: 1.8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.follow-btn.follow-btn--following {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.follow-btn.follow-btn--following:hover {
+    background-color: red;
+}
+
+.follow-btn.follow-btn--following::before {
+    content: '✓ Siguiendo';
+}
+
+.follow-btn.follow-btn--following:hover::before {
+    content: 'X Dejar de seguir';
+}
