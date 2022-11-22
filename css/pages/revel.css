@@ -1,0 +1,12 @@
+@import url('../main.css');
+
+main {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.comments {
+    width: 80%;
+    min-height: 100px;
+}

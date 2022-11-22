@@ -1,7 +1,7 @@
 <?php
     $arrAvatares = [];
 
-    function getRandAvatarURL() {
+    function getRandAvatarURL($id) {
         // Semilla aleatoria de letras y numeros
         $valoresPosibles = 'abcdefghijklmnopqrstuvwxyz';
 
@@ -9,7 +9,7 @@
         $longitud = rand(5, 15);
 
         // Devolver el string
-        return 'https://avatars.dicebear.com/api/adventurer-neutral/' . substr(str_shuffle($valoresPosibles), 0, $longitud) . '.svg';
+        return 'https://avatars.dicebear.com/api/adventurer-neutral/' . $id . '.svg';
     }
 
 
@@ -22,7 +22,7 @@
         if (isset($arrAvatares[$id])) {
             return $arrAvatares[$id];
         } else {
-            $arrAvatares[$id] = getRandAvatarURL();
+            $arrAvatares[$id] = getRandAvatarURL($id);
             return $arrAvatares[$id];
         }
     }

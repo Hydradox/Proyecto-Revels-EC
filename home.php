@@ -1,6 +1,6 @@
 <?php
-require_once('inc/req.inc.php');
-require_once('inc/avatares.inc.php');
+require_once 'inc/req.inc.php';
+require_once 'inc/avatares.inc.php';
 
 
 // Comprobar si NO está logueado
@@ -16,20 +16,24 @@ $follows = $con->query('SELECT id, usuario
     WHERE id IN (
         SELECT userfollowed
         FROM follows
-        WHERE userid = ' . $user['id'] . 
-    ');');
+        WHERE userid = ' . $user['id'] .
+    ');'
+);
 
 
-// Obtener revels propios y de los usuarios que seguimos
-$revels = $con->query('SELECT id, userid, texto, fecha
-    FROM revels
-    WHERE userid = ' . $user['id'] .
-    ' OR userid IN (
+// Obtener revels propios y de los usuarios que seguimos y número de comentarios
+$revels = $con->query('SELECT r.id, r.texto, r.fecha, r.userid, u.usuario, COUNT(c.id) AS numcomentarios
+    FROM revels r
+    LEFT JOIN users u ON u.id = r.userid
+    LEFT JOIN comments c ON c.revelid = r.id
+    WHERE r.userid = ' . $user['id'] . ' OR r.userid IN (
         SELECT userfollowed
         FROM follows
-        WHERE userid = ' . $user['id'] .
-    ')
-    ORDER BY fecha DESC;');
+        WHERE userid = ' . $user['id'] . '
+    )
+    GROUP BY r.id
+    ORDER BY r.fecha DESC;'
+);
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +47,10 @@ $revels = $con->query('SELECT id, userid, texto, fecha
 </head>
 
 <body>
+    <?php
+        //echo '<pre>' . print_r($revels->fetchAll(PDO::FETCH_ASSOC), true) . '</pre>';
+    ?>
+
     <?php include('./inc/header.inc.php') ?>
 
     <main>
@@ -52,7 +60,7 @@ $revels = $con->query('SELECT id, userid, texto, fecha
             <ul>
                 <?php
                     while ($follow = $follows->fetch()) {
-                        echo '<li class="listed-user"><a href="/user/' . $follow['id'] . '">';
+                        echo '<li class="listed-user"><a href="#">';
 
                         echo '<img src="' . getAvatar($follow['id']) . '" alt="Avatar de ' . $follow['usuario'] . '" class="avatar">';
                         echo '<span>' . $follow['usuario'] . '</span>';
@@ -60,7 +68,7 @@ $revels = $con->query('SELECT id, userid, texto, fecha
                         echo '</a></li>';
                     }
 
-                    if($follows->rowCount() === 0) {
+                    if ($follows->rowCount() === 0) {
                         include('./inc/empty.inc.php');
                         echo '<div class="silent-txt">Esto está muy vacío...<br>¿Por qué no sigues a alguien?</div>';
                     }
@@ -79,26 +87,27 @@ $revels = $con->query('SELECT id, userid, texto, fecha
                     <img class="revel-pp" src=<?= getAvatar($revel['userid']) ?> alt="Avatar del usuario">
                     
                     <div class="revel-data">
-                        <a class="revel-content" href=<?= '/revel/' . $revel['id'] ?> >
-                            <span class="revel-sender">@<?= $sender->fetch()['usuario'] ?></span>
+                        <a class="revel-content" href="revel.php?revelID=<?= $revel['id'] ?>">
+                            <span class="revel-sender"><?=$sender->fetch()['usuario'] ?>
+                                <span class="revel-date">• <?= formatTime($revel['fecha']) ?></span>
+                            </span>
                             <p class="revel-text"><?= $revel['texto'] ?></p>
                         </a>
 
                         <div class="revel-actions">
-                            <a href="#">
+                            <a href="revel.php?revelID=<?= $revel['id'] ?>">
                                 <img src="/media/icons/comment.svg" alt="Comentarios">
-                                <span class="action-label">2</span>
+                                <span class="action-label"><?= $revel['numcomentarios'] > 0
+                                    ? $revel['numcomentarios'] : '' ?></span>
                             </a>
-
-                            <img src="/media/icons/heart.svg" alt="Likes">
 
                             <img src="/media/icons/share.svg" alt="Compartir">
                         </div>
                     </div>
                 </div>
             <?php }
-                if($revels->rowCount() === 0) {
-                    include('./inc/empty.inc.php');
+                if ($revels->rowCount() === 0) {
+                    include './inc/empty.inc.php';
                     echo '<div class="silent-txt">Está feed está muy vacía</div>';
                 }
             ?>

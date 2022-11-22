@@ -22,6 +22,7 @@ body {
     font-family: 'Roboto', sans-serif;
     letter-spacing: .5px;
     color: var(--semi-black);
+    background-color: var(--color-primary-light);
 }
 
 
@@ -31,6 +32,7 @@ body {
 main {
     width: 100%;
     min-height: calc(100vh - 5rem);
+    background-color: var(--white);
 }
 
 header {
@@ -356,4 +358,200 @@ fieldset .error:hover {
     color: #333;
     text-align: center;
     margin-top: 1rem;
+}
+
+
+.new-revel-wrapper {
+    display: flex;
+}
+
+.new-revel-wrapper img {
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.revel-textarea {
+    width: 100%;
+    padding: 1rem;
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1em;
+    font-weight: 400;
+    letter-spacing: 1px;
+
+    outline: none;
+    border: 2px solid var(--dark-grey);
+    border-radius: .3rem;
+
+    resize: none;
+}
+
+.revel-publish-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: .8em;
+
+    margin-left: 5rem;
+}
+
+.revel-publish {
+    margin-top: 1rem;
+    padding: .7rem 1rem;
+
+    font-size: 1.3em;
+    font-weight: 600;
+
+    background-color: var(--color-primary);
+    color: var(--white);
+
+    outline: none;
+    border: none;
+    border-radius: .2rem;
+
+    transition: background-color .2s ease-in-out;
+    cursor: pointer;
+}
+
+.revel-publish[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.revel-publish:not([disabled]):hover {
+    background-color: var(--color-primary-dark);
+}
+
+.flex-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+/**
+ * REVEL
+ */
+.revel {
+    width: min(100%, 1000px);
+    min-height: 100px;
+    height: auto;
+
+    display: block;
+
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    background-color: var(--white);
+
+    display: flex;
+    transition: margin .2s ease-in-out;
+
+    flex-shrink: 0;
+}
+
+.revel.bordered {
+    border: 2px solid var(--dark-grey);
+    border-radius: .3rem;
+}
+
+.revel:hover {
+    /*margin: 1rem 5px;*/
+}
+
+.revel-pp {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.revel-data {
+    flex-grow: 1;
+    height: 100%;
+
+    margin-left: 1rem;
+    color: var(--semi-black);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.revel-data a {
+    color: var(--semi-black);
+}
+
+.revel-sender {
+    display: flex;
+    align-items: center;
+}
+
+.revel-date {
+    margin-left: .3rem;
+    font-size: .7rem;
+    color: #555;
+}
+
+.revel-content {
+    padding: .5rem;
+    border-radius: .7rem;
+    transition: background-color .2s ease-in-out;
+}
+
+.revel-content:not(.comment):hover,
+.revel-content:not(.comment):focus {
+    background-color: var(--color-primary-light);
+}
+
+
+.revel-sender {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.revel-text {
+    margin-top: .5rem;
+    font-weight: 400;
+
+    text-align: justify;
+}
+
+.revel-actions {
+    width: min(100%, 150px);
+    height: 2rem;
+    margin-top: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.revel-actions > * {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.revel-actions img {
+    height: 60%;
+}
+
+.action-label {
+    margin-left: .5rem;
+}
+
+.error {
+    color: red;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.error::before {
+    content: "✗ ";
 }

@@ -3,7 +3,7 @@
         <img class="header-logo" src="/media/icons/revels-logo.png" alt="Page logo">
     </a>
 
-    <?php if($user !== null) { /* Si está logueado */ ?>
+    <?php if ($user !== null) { /* Si está logueado */ ?>
         <div class="header-container">
             <form class="search-form" action="result.php" method="GET" autocomplete="off">
                 <fieldset class="white">

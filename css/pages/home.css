@@ -14,10 +14,10 @@ main > * {
 
 
 .userlist {
-    max-width: 15rem;
-    min-width: 10rem;
-    width: 20vw;
+    width: 15rem;
     height: 100%;
+
+    flex-shrink: 0;
 }
 
 .listed-user {
@@ -54,7 +54,7 @@ main > * {
 
 
 .revels-container {
-    flex-grow: 1;
+    width: calc(100vw - 15rem);
     overflow-y: auto;
 
     background-color: var(--color-primary-light);
@@ -62,99 +62,5 @@ main > * {
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-
-/**
- * REVEL
- */
-.revel {
-    width: 100%;
-    min-height: 100px;
-    height: auto;
-
-    display: block;
-
-    padding: 1rem;
-    box-sizing: border-box;
-    margin-bottom: 5px;
-    background-color: var(--white);
-
-    display: flex;
-    transition: margin .2s ease-in-out;
-}
-
-.revel:hover {
-    /*margin: 1rem 5px;*/
-}
-
-.revel-pp {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.revel-data {
-    flex-grow: 1;
-    height: 100%;
-
-    margin-left: 1rem;
-    color: var(--semi-black);
-
-    display: flex;
-    flex-direction: column;
-}
-
-.revel-data a {
-    color: var(--semi-black);
-}
-
-.revel-content {
-    padding: .5rem;
-    border-radius: .7rem;
-    transition: background-color .2s ease-in-out;
-}
-
-.revel-content:hover,
-.revel-content:focus {
-    background-color: var(--color-primary-light);
-}
-
-
-.revel-sender {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.revel-text {
-    margin-top: .5rem;
-    font-weight: 400;
-}
-
-.revel-actions {
-    max-width: 600px;
-    width: 100%;
-    height: 2rem;
-    margin-top: 1rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.revel-actions > * {
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-}
-
-.revel-actions img {
-    height: 60%;
-}
-
-.action-label {
-    margin-left: .5rem;
+    align-items: flex-start;
 }

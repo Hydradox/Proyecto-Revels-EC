@@ -3,7 +3,7 @@
 
 
     // Comprobar si está logueado
-    if($user !== null) {
+    if ($user !== null) {
         // Si está logueado, mostrar el header
         header('Location: /home.php');
     }
@@ -13,20 +13,20 @@
         $expNotEmpty = '/^.{1,}$/';
 
         // Comprobar login
-        if(isset($_POST['loginMail'])) {
+        if (isset($_POST['loginMail'])) {
             // Comprobar login nombre o email
-            if(!isset($_POST['loginMail']) || !preg_match($expNotEmpty, $_POST['loginMail'])) {
+            if (!isset($_POST['loginMail']) || !preg_match($expNotEmpty, $_POST['loginMail'])) {
                 $errors['loginMail'] = 'El campo email es obligatorio';
             }
     
             // Comprobar login contraseña
-            if(!isset($_POST['loginPassword']) || !preg_match($expNotEmpty, $_POST['loginPassword'])) {
+            if (!isset($_POST['loginPassword']) || !preg_match($expNotEmpty, $_POST['loginPassword'])) {
                 $errors['loginPassword'] = 'El campo contraseña es obligatorio';
             }
 
             
             // Si no hay errores, comprobar si el usuario existe
-            if(!isset($errors)) {
+            if (!isset($errors)) {
                 $stmt = $con->prepare('SELECT * FROM users WHERE email = :email OR usuario = :username');
                 $stmt->execute([
                     ':email' => $_POST['loginMail'],
@@ -35,8 +35,8 @@
                 $res = $stmt->fetch(PDO::FETCH_ASSOC);
                 
                 // Si el usuario existe, comprobar la contraseña
-                if($res) {
-                    if(password_verify($_POST['loginPassword'], $res['contrasenya'])) {
+                if ($res) {
+                    if (password_verify($_POST['loginPassword'], $res['contrasenya'])) {
                         // Si la contraseña es correcta, iniciar sesión
                         $_SESSION['user'] = [
                             'id' => $res['id'],
@@ -56,38 +56,38 @@
 
         // Comprobar registro
         if (isset($_POST['registerUsername'])) {
-            $expNombre = '/^\w{4,20}$/';
+            $expNombre = '/^\w{3,20}$/';
             $expMail = '/^[\w\.\-]+@[\w\-]+\.[\w\-\.]+$/';
-            $expContrasenya = '/^\w{8,20}$/';
+            $expContrasenya = '/^\w{3,20}$/';
     
             // Comprobar registro nombre
-            if(!isset($_POST['registerUsername']) || !preg_match($expNombre, $_POST['registerUsername'])) {
+            if (!isset($_POST['registerUsername']) || !preg_match($expNombre, $_POST['registerUsername'])) {
                 $errors['registerUsername'] = 'El campo nombre debe tener entre 4 y 20 caracteres alfanuméricos';
             }
     
             // Comprobar registro email
-            if(!isset($_POST['registerEmail']) || !preg_match($expMail, $_POST['registerEmail'])) {
+            if (!isset($_POST['registerEmail']) || !preg_match($expMail, $_POST['registerEmail'])) {
                 $errors['registerEmail'] = 'El campo email no es válido';
             }
     
             // Comprobar registro contraseña
-            if(!isset($_POST['registerPassword']) || !preg_match($expContrasenya, $_POST['registerPassword'])) {
+            if (!isset($_POST['registerPassword']) || !preg_match($expContrasenya, $_POST['registerPassword'])) {
                 $errors['registerPassword'] = 'El campo contraseña debe tener al menos 8 caracteres alfanuméricos';
             }
     
             // Comprobar registro confirmar contraseña
-            if(!isset($_POST['registerConfirmPassword']) || empty($_POST['registerConfirmPassword'])) {
+            if (!isset($_POST['registerConfirmPassword']) || empty($_POST['registerConfirmPassword'])) {
                 $errors['registerConfirmPassword'] = 'El campo confirmar contraseña es obligatorio';
             }
     
             // Comprobar registro confirmar contraseña
-            if(isset($_POST['registerPassword']) && isset($_POST['registerConfirmPassword']) && $_POST['registerPassword'] !== $_POST['registerConfirmPassword']) {
+            if (isset($_POST['registerPassword']) && isset($_POST['registerConfirmPassword']) && $_POST['registerPassword'] !== $_POST['registerConfirmPassword']) {
                 $errors['registerPassword'] = 'Las contraseñas no coinciden';
                 $errors['registerConfirmPassword'] = 'Las contraseñas no coinciden';
             }
     
             // Si no hay errores, comprobar si el usuario existe
-            if(empty($errors)) {
+            if (empty($errors)) {
                 // TODO: Comprobar si existe y dar error si es así
                 $stmt = $con->prepare('SELECT * FROM users WHERE email = :email OR usuario = :username');
                 $stmt->execute([
@@ -96,10 +96,10 @@
                 ]);
                 $res = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                if($res) {
+                if ($res) {
                     // El usuario ya existe
                     // Comprobar si es por email o por nombre
-                    if($res['email'] === $_POST['registerEmail']) {
+                    if ($res['email'] === $_POST['registerEmail']) {
                         $errors['registerEmail'] = 'El email ya está en uso';
                     } else {
                         $errors['registerUsername'] = 'El nombre de usuario ya está en uso';
@@ -147,7 +147,7 @@
                         <input type="text" name="loginMail" placeholder="ejemplo@ejemplo.com"
                             value="<?= isset($_POST['loginMail']) ? $_POST['loginMail'] : '' ?>">
 
-                        <?php if(isset($errors['loginMail'])) { ?>
+                        <?php if (isset($errors['loginMail'])) { ?>
                             <img title="<?= $errors['loginMail'] ?>" class="error" src="/media/icons/exclamation-mark.svg" alt="Error message">
                         <?php } ?>
                     </fieldset>
@@ -157,7 +157,7 @@
                         <legend>Contraseña</legend>
                         <input type="password" name="loginPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
 
-                        <?php if(isset($errors['loginPassword'])) { ?>
+                        <?php if (isset($errors['loginPassword'])) { ?>
                             <img title="<?= $errors['loginPassword'] ?>" class="error" src="/media/icons/exclamation-mark.svg" alt="Error message">
                         <?php } ?>
                     </fieldset>
@@ -182,7 +182,7 @@
                         <input type="text" name="registerUsername" placeholder="PepeJuan17"
                             value="<?= isset($_POST['registerUsername']) ? $_POST['registerUsername'] : '' ?>">
 
-                        <?php if(isset($errors['registerUsername'])) { ?>
+                        <?php if (isset($errors['registerUsername'])) { ?>
                             <img title="<?= $errors['registerUsername'] ?>" class="error" src="/media/icons/exclamation-mark.svg" alt="Error message">
                         <?php } ?>
                     </fieldset>
@@ -193,7 +193,7 @@
                         <input type="text" name="registerEmail" placeholder="ejemplo@ejemplo.com"
                             value="<?= isset($_POST['registerEmail']) ? $_POST['registerEmail'] : '' ?>">
 
-                        <?php if(isset($errors['registerEmail'])) { ?>
+                        <?php if (isset($errors['registerEmail'])) { ?>
                             <img title="<?= $errors['registerEmail'] ?>" class="error" src="/media/icons/exclamation-mark.svg" alt="Error message">
                         <?php } ?>
                     </fieldset>
@@ -203,7 +203,7 @@
                         <legend>Contraseña</legend>
                         <input type="password" name="registerPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
 
-                        <?php if(isset($errors['registerPassword'])) { ?>
+                        <?php if (isset($errors['registerPassword'])) { ?>
                             <img title="<?= $errors['registerPassword'] ?>" class="error" src="/media/icons/exclamation-mark.svg" alt="Error message">
                         <?php } ?>
                     </fieldset>
@@ -213,7 +213,7 @@
                         <legend>Repetir contraseña</legend>
                         <input type="password" name="registerConfirmPassword" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;">
 
-                        <?php if(isset($errors['registerConfirmPassword'])) { ?>
+                        <?php if (isset($errors['registerConfirmPassword'])) { ?>
                             <img title="<?= $errors['registerConfirmPassword'] ?>" class="error" src="/media/icons/exclamation-mark.svg" alt="Error message">
                         <?php } ?>
                     </fieldset>
@@ -222,7 +222,7 @@
                         <input class="btn" type="submit" value="Registrarse">
                     </div>
 
-                    <?php if(isset($_GET['registered'])) { ?>
+                    <?php if (isset($_GET['registered'])) { ?>
                         <p class="correct">Registro realizado correctamente</p>
                     <?php } ?>
                 </form>
