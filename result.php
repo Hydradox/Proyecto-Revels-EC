@@ -7,31 +7,6 @@
     }
 
 
-    // Acciones de seguir / dejar de seguir
-    if (isset($_GET['action']) && isset($_GET['userID'])) {
-        $action = $_GET['action'];
-        $id = $_GET['userID'];
-
-        // Seguir
-        if ($action === 'follow') {
-            $query = $con->prepare('INSERT INTO follows (userid, userfollowed) VALUES (:userid, :userfollowed);');
-            $query->execute([
-                'userid' => $user['id'],
-                'userfollowed' => $id
-            ]);
-
-            // Dejar de seguir
-        } else if ($action === 'unfollow') {
-            $query = $con->prepare('DELETE FROM follows WHERE userid = :userid AND userfollowed = :userfollowed;');
-            $query->execute([
-                'userid' => $user['id'],
-                'userfollowed' => $id
-            ]);
-        }
-    }
-
-
-
     // Buscar usuarios menos el propio
     if (isset($_GET['user'])) {
         $users = $con->prepare('SELECT id, usuario FROM users WHERE usuario LIKE :user AND id != :id;');
@@ -41,8 +16,8 @@
         ]);
 
         // Obtener usuarios que seguimos
-        $follows = $con->query('SELECT userfollowed FROM follows WHERE userid = ' . $user['id'] . ';');
-        $follows = $follows->fetchAll(PDO::FETCH_COLUMN);
+        $followList = $con->query('SELECT userfollowed FROM follows WHERE userid = ' . $user['id'] . ';');
+        $followList = $followList->fetchAll(PDO::FETCH_COLUMN);
     } else {
         $searchError = true;
     }
@@ -61,43 +36,47 @@
     <?php include_once('./inc/header.inc.php') ?>
 
     <main>
-        <?php if (isset($searchError)) { ?>
-            <div class="error">
-                <p>Debes introducir un nombre de usuario para buscar.</p>
-            </div>
-        <?php } else { ?>
-            <div class="txt-header">Resultados de la búsqueda: (<?= $_GET['user'] ?>)</div>
+        <?php include_once('./inc/sidebar.inc.php') ?>
 
-            <div class="user-results">
-                <?php
-                while ($followedUser = $users->fetch()) {
-                    $isFollowing = !in_array($followedUser['id'], $follows);
-                ?>
-                    <div class="user">
-                        <div class="user__upper">
-                            <img src="<?= getAvatar($followedUser['id']) ?>" alt="Avatar de <?=
-                                $followedUser['usuario'] ?>" class="user__avatar">
+        <div class="opposite-aside">
+            <?php if (isset($searchError)) { ?>
+                <div class="error">
+                    <p>Debes introducir un nombre de usuario para buscar.</p>
+                </div>
+            <?php } else { ?>
+                <div class="txt-header">Resultados de la búsqueda: (<?= $_GET['user'] ?>)</div>
+    
+                <div class="user-results">
+                    <?php
+                    while ($followedUser = $users->fetch()) {
+                        $isFollowing = !in_array($followedUser['id'], $followList);
+                    ?>
+                        <div class="user">
+                            <div class="user__upper">
+                                <img src="<?= getAvatar($followedUser['id']) ?>" alt="Avatar de <?=
+                                    $followedUser['usuario'] ?>" class="user__avatar">
+                            </div>
+    
+                            <div class="user__lower">
+                                <?= $followedUser['usuario'] ?>
+    
+                                <a href="result.php?user=<?= $_GET['user'] ?>&action=<?= $isFollowing ?
+                                    'follow' : 'unfollow' ?>&userID=<?= $followedUser['id'] ?>"
+                                    class="follow-btn<?= $isFollowing ? '' : ' follow-btn--following' ?>"></a>
+                            </div>
                         </div>
-
-                        <div class="user__lower">
-                            <?= $followedUser['usuario'] ?>
-
-                            <a href="result.php?user=<?= $_GET['user'] ?>&action=<?= $isFollowing ?
-                                'follow' : 'unfollow' ?>&userID=<?= $followedUser['id'] ?>"
-                                class="follow-btn<?= $isFollowing ? '' : ' follow-btn--following' ?>"></a>
+                    <?php
+                    }
+                    
+                    if ($users->rowCount() === 0) { ?>
+                        <div>
+                            <?php include 'inc/empty.inc.php' ?>
+                            <p class="silent-txt">No se han encontrado resultados.</p>
                         </div>
-                    </div>
-                <?php
-                }
-                
-                if ($users->rowCount() === 0) { ?>
-                    <div>
-                        <?php include 'inc/empty.inc.php' ?>
-                        <p class="silent-txt">No se han encontrado resultados.</p>
-                    </div>
-                <?php } ?>
-            </div>
-        <?php } ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
     </main>
 </body>
 </html>

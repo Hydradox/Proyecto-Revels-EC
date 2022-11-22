@@ -10,17 +10,6 @@ if ($user === null) {
 }
 
 
-// Estamos "conectados" como usuario con ID #6
-$follows = $con->query('SELECT id, usuario
-    FROM users
-    WHERE id IN (
-        SELECT userfollowed
-        FROM follows
-        WHERE userid = ' . $user['id'] .
-    ');'
-);
-
-
 // Obtener revels propios y de los usuarios que seguimos y número de comentarios
 $revels = $con->query('SELECT r.id, r.texto, r.fecha, r.userid, u.usuario, COUNT(c.id) AS numcomentarios
     FROM revels r
@@ -47,36 +36,12 @@ $revels = $con->query('SELECT r.id, r.texto, r.fecha, r.userid, u.usuario, COUNT
 </head>
 
 <body>
-    <?php
-        //echo '<pre>' . print_r($revels->fetchAll(PDO::FETCH_ASSOC), true) . '</pre>';
-    ?>
-
     <?php include('./inc/header.inc.php') ?>
 
     <main>
-        <div class="userlist">
-            <span class="txt-header">Siguiendo</span>
+        <?php include_once('./inc/sidebar.inc.php') ?>
 
-            <ul>
-                <?php
-                    while ($follow = $follows->fetch()) {
-                        echo '<li class="listed-user"><a href="#">';
-
-                        echo '<img src="' . getAvatar($follow['id']) . '" alt="Avatar de ' . $follow['usuario'] . '" class="avatar">';
-                        echo '<span>' . $follow['usuario'] . '</span>';
-
-                        echo '</a></li>';
-                    }
-
-                    if ($follows->rowCount() === 0) {
-                        include('./inc/empty.inc.php');
-                        echo '<div class="silent-txt">Esto está muy vacío...<br>¿Por qué no sigues a alguien?</div>';
-                    }
-                ?>
-            </ul>
-        </div> <!-- .userlist -->
-
-        <div class="revels-container">
+        <div class="opposite-aside revels-container">
             <span class="txt-header">Revels de gente que sigues</span>
 
             <?php while ($revel = $revels->fetch()) {

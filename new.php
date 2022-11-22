@@ -42,24 +42,28 @@
     <?php require_once 'inc/header.inc.php'; ?>
 
     <main>
-        <div class="txt-header">Añadir un nuevo Revel</div>
+        <?php include_once('./inc/sidebar.inc.php') ?>
 
-        <form action="new.php" method="POST">
-            <div class="new-revel-wrapper">
-                <img src="<?= getAvatar($user['id']) ?>" alt="Perfil de <?= $user['usuario'] ?>">
-                <textarea id="new-revel" class="revel-textarea" autofocus
-                    name="newRevel" cols="30" rows="3" placeholder="Nuevo Revel"></textarea>
-            </div>
-
-            <div class="revel-publish-wrapper">
-                <div><span id="char-count">0</span> / 640</div>
-                <input class="revel-publish" type="submit" value="Publicar Revel" disabled="true">
-            </div>
-        </form>
-
-        <?php if (isset($_GET['error'])) { ?>
-            <div class="error">Ha habido un problema al publicar el Revel</div>
-        <?php } ?>
+        <div class="opposite-aside">
+            <div class="txt-header">Añadir un nuevo Revel</div>
+    
+            <form action="new.php" method="POST">
+                <div class="new-revel-wrapper">
+                    <img src="<?= getAvatar($user['id']) ?>" alt="Perfil de <?= $user['usuario'] ?>">
+                    <textarea id="new-revel" class="revel-textarea" autofocus
+                        name="newRevel" cols="30" rows="3" placeholder="Nuevo Revel"></textarea>
+                </div>
+    
+                <div class="revel-publish-wrapper">
+                    <div><span id="char-count">0</span> / 640</div>
+                    <input class="revel-publish" type="submit" value="Publicar Revel" disabled="true">
+                </div>
+            </form>
+    
+            <?php if (isset($_GET['error'])) { ?>
+                <div class="error">Ha habido un problema al publicar el Revel</div>
+            <?php } ?>
+        </div>
     </main>
 
 

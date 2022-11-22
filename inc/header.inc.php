@@ -17,7 +17,7 @@
 
             <a class="img-link img-actions" title="Home" href="/"><img src="/media/icons/home.svg" alt="Home"></a>
             <a class="img-link img-actions" title="Nuevo Revel" href="/new.php"><img src="/media/icons/add.svg" alt="Nuevo Revel"></a>
-            <a class="img-link img-actions" title="Mi cuenta" href="/account.php"><img src="/media/icons/account.svg" alt="Mi cuenta"></a>
+            <a class="img-link img-actions" title="Mi cuenta" href="/account.php"><img class="header-pp" src="<?= getAvatar($user['id']) ?>" alt="Mi cuenta"></a>
             <a class="img-link img-actions" title="Cerrar sesión" href="/logout.php"><img src="/media/icons/exit.svg" alt="Cerrar sesión"></a>
         </div>
 

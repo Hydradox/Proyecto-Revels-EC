@@ -55,73 +55,72 @@
     <link rel="stylesheet" href="/css/pages/revel.css">
 </head>
 <body>
-    <?php require_once('inc/header.inc.php'); ?>
-
-    <?php
-        // echo '<pre>' . print_r($revel, true) . '</pre>';
-        // echo '<pre>' . print_r($comments, true) . '</pre>';
-    ?>
+    <?php require_once('inc/header.inc.php');?>
 
     <main>
-        <div class="txt-header">Revel de <?= $revel['usuario'] ?></div>
-
-        <div class="revel bordered">
-            <img class="revel-pp" src=<?= getAvatar($revel['userid']) ?> alt="Avatar del usuario">
-            
-            <div class="revel-data">
-                <a class="revel-content" href="revel.php?revelID=<?= $revel['id'] ?>">
-                    <span class="revel-sender"><?=$revel['usuario'] ?>
-                        <span class="revel-date">• <?= formatTime($revel['fecha']) ?></span>
-                    </span>
-                    <p class="revel-text"><?= $revel['texto'] ?></p>
-                </a>
-
-                <div class="revel-actions">
-                    <a href="revel.php?revelID=<?= $revel['id'] ?>">
-                        <img src="/media/icons/comment.svg" alt="Comentarios">
-                        <span class="action-label"><?= count($comments) > 0
-                            ? count($comments) : '' ?></span>
+        <?php require_once('inc/sidebar.inc.php');?>
+    
+        <div class="opposite-aside">
+            <div class="txt-header">Revel de <?= $revel['usuario'] ?></div>
+    
+            <div class="revel bordered">
+                <img class="revel-pp" src=<?= getAvatar($revel['userid']) ?> alt="Avatar del usuario">
+                
+                <div class="revel-data">
+                    <a class="revel-content" href="revel.php?revelID=<?= $revel['id'] ?>">
+                        <span class="revel-sender"><?=$revel['usuario'] ?>
+                            <span class="revel-date">• <?= formatTime($revel['fecha']) ?></span>
+                        </span>
+                        <p class="revel-text"><?= $revel['texto'] ?></p>
                     </a>
-
-                    <img src="/media/icons/share.svg" alt="Compartir">
-                </div>
-            </div>
-        </div>
-
-        <div class="comments">
-            <?php foreach ($comments as $comment) { ?>
-                <div class="revel bordered">
-                    <img class="revel-pp" src=<?= getAvatar($comment['userid']) ?> alt="Avatar del usuario">
-                    
-                    <div class="revel-data">
-                        <div class="revel-content comment" href="revel.php?revelID=<?= $comment['id'] ?>">
-                            <span class="revel-sender"><?=$comment['usuario'] ?>
-                                <span class="revel-date">• <?= formatTime($comment['fecha']) ?></span>
-                            </span>
-                            <p class="revel-text"><?= $comment['texto'] ?></p>
-                        </div>
+    
+                    <div class="revel-actions">
+                        <a href="revel.php?revelID=<?= $revel['id'] ?>">
+                            <img src="/media/icons/comment.svg" alt="Comentarios">
+                            <span class="action-label"><?= count($comments) > 0
+                                ? count($comments) : '' ?></span>
+                        </a>
+    
+                        <img src="/media/icons/share.svg" alt="Compartir">
                     </div>
                 </div>
-            <?php } ?>
-
-            <form action="comment.php" method="POST">
-                <div class="new-revel-wrapper">
-                    <img src="<?= getAvatar($user['id']) ?>" alt="Perfil de <?= $user['usuario'] ?>">
-                    <textarea id="new-comment" class="revel-textarea" autofocus
-                        name="newComment" cols="30" rows="3" placeholder="Nuevo comentario"></textarea>
-                </div>
-
-                <input type="hidden" name="revelID" value="<?= $_GET['revelID'] ?>">
-
-                <div class="revel-publish-wrapper">
-                    <div><span id="char-count">0</span> / 640</div>
-                    <input class="revel-publish" type="submit" value="Publicar comentario" disabled="true">
-                </div>
-            </form>
-
-            <?php if (isset($_GET['error'])) { ?>
-                <div class="error">Ha habido un problema al publicar el comentario</div>
-            <?php } ?>
+            </div>
+    
+            <div class="comments">
+                <?php foreach ($comments as $comment) { ?>
+                    <div class="revel bordered">
+                        <img class="revel-pp" src=<?= getAvatar($comment['userid']) ?> alt="Avatar del usuario">
+                        
+                        <div class="revel-data">
+                            <div class="revel-content comment" href="revel.php?revelID=<?= $comment['id'] ?>">
+                                <span class="revel-sender"><?=$comment['usuario'] ?>
+                                    <span class="revel-date">• <?= formatTime($comment['fecha']) ?></span>
+                                </span>
+                                <p class="revel-text"><?= $comment['texto'] ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+    
+                <form action="comment.php" method="POST">
+                    <div class="new-revel-wrapper">
+                        <img src="<?= getAvatar($user['id']) ?>" alt="Perfil de <?= $user['usuario'] ?>">
+                        <textarea id="new-comment" class="revel-textarea" autofocus
+                            name="newComment" cols="30" rows="3" placeholder="Nuevo comentario"></textarea>
+                    </div>
+    
+                    <input type="hidden" name="revelID" value="<?= $_GET['revelID'] ?>">
+    
+                    <div class="revel-publish-wrapper">
+                        <div><span id="char-count">0</span> / 640</div>
+                        <input class="revel-publish" type="submit" value="Publicar comentario" disabled="true">
+                    </div>
+                </form>
+    
+                <?php if (isset($_GET['error'])) { ?>
+                    <div class="error">Ha habido un problema al publicar el comentario</div>
+                <?php } ?>
+            </div>
         </div>
     </main>
 

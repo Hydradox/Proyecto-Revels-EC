@@ -26,6 +26,33 @@
     }
 
 
+    // Acciones de seguir / dejar de seguir
+    if (isset($_GET['action']) && isset($_GET['userID'])) {
+        $action = $_GET['action'];
+        $id = $_GET['userID'];
+
+        // Seguir
+        if ($action === 'follow') {
+            $query = $con->prepare('INSERT INTO follows (userid, userfollowed) VALUES (:userid, :userfollowed);');
+            $query->execute([
+                'userid' => $user['id'],
+                'userfollowed' => $id
+            ]);
+
+            // Dejar de seguir
+        } elseif ($action === 'unfollow') {
+            $query = $con->prepare('DELETE FROM follows WHERE userid = :userid AND userfollowed = :userfollowed;');
+            $query->execute([
+                'userid' => $user['id'],
+                'userfollowed' => $id
+            ]);
+        }
+
+        // Redirigir a la página anterior
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+
+
 
     function formatTime($time) {
         $time = strtotime($time);

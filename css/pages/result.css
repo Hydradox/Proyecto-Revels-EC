@@ -1,11 +1,5 @@
 @import url('../main.css');
 
-main {
-    width: min(100%, 1200px);
-    margin: 0 auto;
-    padding: 1rem;
-}
-
 .user-results {
     margin-top: 1rem;
 
@@ -47,49 +41,4 @@ main {
 
     font-weight: 600;
     color: var(--semi-black);
-}
-
-
-.follow-btn {
-    display: block;
-    margin-top: 1rem;
-    padding: .5rem .3rem;
-
-    background-color: var(--grey-light);
-    color: var(--dark-grey);
-    text-align: center;
-    border-radius: .3rem;
-
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-
-.follow-btn:hover {
-    background-color: var(--grey);
-    color: var(--semi-black);
-}
-
-.follow-btn::before {
-    content: '+ Seguir';
-    height: 1.8rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.follow-btn.follow-btn--following {
-    background-color: var(--color-primary);
-    color: #fff;
-}
-
-.follow-btn.follow-btn--following:hover {
-    background-color: red;
-}
-
-.follow-btn.follow-btn--following::before {
-    content: '✓ Siguiendo';
-}
-
-.follow-btn.follow-btn--following:hover::before {
-    content: 'X Dejar de seguir';
 }
