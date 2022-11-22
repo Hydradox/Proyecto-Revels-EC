@@ -16,11 +16,10 @@
 
         $newRevel = trim($_POST['newRevel']);
 
-        $query = $con->prepare('INSERT INTO revels (userid, texto, fecha) VALUES (:userid, :texto, :fecha);');
+        $query = $con->prepare('INSERT INTO revels (userid, texto) VALUES (:userid, :texto);');
         $query->execute([
             'userid' => $user['id'],
-            'texto' => $newRevel,
-            'fecha' => date('Y-m-d H:i:s')
+            'texto' => $newRevel
         ]);
 
         // Obtener el ID del último revel
